@@ -78,13 +78,24 @@
             "php-cs-fixer fix"
         ],
         "test": [
-            "@test:cs"
+            "@test:cs",
+            "@test:codeception"
         ],
         "db": [
             "php bin/console doctrine:database:drop --force",
             "php bin/console doctrine:database:create",
             "php bin/console doctrine:migrations:migrate --no-interaction",
             "php bin/console doctrine:fixtures:load --no-interaction"
+        ],
+        "test:codeception": [
+            "php vendor/bin/codecept clean",
+            "APP_ENV=test php bin/console doctrine:database:drop --force",
+            "APP_ENV=test php bin/console doctrine:database:create",
+            "APP_ENV=test php bin/console doctrine:schema:create --quiet",
+            "php vendor/bin/codecept run --no-artifacts"
+        ],
+        "tests:build": [
+            "php vendor/bin/codecept build"
         ]
     },
     "scripts-descriptions": {
@@ -92,7 +103,8 @@
         "test:cs": "Vérifie que le code est conforme aux règles de code",
         "fix:cs": "Corrige le code pour qu'il soit conforme aux règles de code",
         "test": "Lance tous les tests de l'application",
-        "db": "Génère le jeu de données factice de l'application"
+        "db": "Génère le jeu de données factice de l'application",
+        "tests:build": "Construit les objets servants aux tests"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -112,6 +124,7 @@
         "doctrine/doctrine-fixtures-bundle": "^3.5",
         "friendsofphp/php-cs-fixer": "^3.48",
         "symfony/maker-bundle": "^1.52",
+        "symfony/proxy-manager-bridge": "6.3.*",
         "zenstruck/foundry": "^1.36"
     }
 }
