@@ -70,10 +70,21 @@
         "start": [
             "Composer\\Config::disableProcessTimeout",
             "symfony serve"
+        ],
+        "test:cs": [
+            "php-cs-fixer fix --dry-run"
+        ],
+        "fix:cs": [
+            "php-cs-fixer fix"
+        ],
+        "test": [
+            "@test:cs"
         ]
     },
     "scripts-descriptions": {
-        "start": "Démarre le serveur de développement local sans limite d'exécution de script"
+        "start": "Démarre le serveur de développement local sans limite d'exécution de script",
+        "test:cs": "Vérifie que le code est conforme aux règles de code",
+        "fix:cs": "Corrige le code pour qu'il soit conforme aux règles de code"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -83,5 +94,8 @@
             "allow-contrib": false,
             "require": "6.3.*"
         }
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.48"
     }
 }

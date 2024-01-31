@@ -53,3 +53,32 @@ Vous pouvez lancer le serveur web local en exécutant la commande suivante :
 composer start
 ```
 
+## Style de codage
+
+Nous suivons les bonnes pratiques de `Symfony`, afin de vérifier la conformité du code veuillez taper la commande suivante :
+
+```shell
+composer test:cs
+```
+
+Afin de corriger votre code selon les standards de Symfony, veuillez taper :
+
+```shell
+composer fix:cs
+```
+
+## Données factices
+
+Afin de générer le jeu de données de l'application, veuillez taper la commande suivante :
+
+```shell
+composer db
+```
+
+## Tests
+
+Afin de lancer les tests de l'application, veuillez taper la commande :
+
+```shell
+composer test
+```
