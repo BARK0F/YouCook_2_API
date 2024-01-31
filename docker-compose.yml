@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  youcook_db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - "youcook-data:/var/lib/mysql"
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+    ports:
+      - "7080:80"
+
+volumes:
+  youcook-data:
