@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\AllergenFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -9,9 +10,11 @@ class AllergenFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        $allergens = json_decode(file_get_contents(__DIR__.'/data/Allergen.json'), true);
 
-        $manager->flush();
+        foreach ($allergens as $allergen) {
+            AllergenFactory::createOne(['name' => $allergen['name']]);
+        }
     }
 }
+
