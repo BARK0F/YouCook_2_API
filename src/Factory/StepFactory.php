@@ -57,9 +57,7 @@ final class StepFactory extends ModelFactory
      */
     protected function initialize(): self
     {
-        return $this
-            // ->afterInstantiate(function(Step $step): void {})
-        ;
+        return $this;
     }
 
     protected static function getClass(): string
