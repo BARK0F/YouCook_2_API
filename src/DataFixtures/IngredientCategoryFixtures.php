@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\IngredientCategoryFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -9,9 +10,10 @@ class IngredientCategoryFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        $ingredientCategories = json_decode(file_get_contents(__DIR__.'/data/IngredientCategory.json'), true);
 
-        $manager->flush();
+        foreach ($ingredientCategories as $category) {
+            IngredientCategoryFactory::createOne(['name' => $category['name']]);
+        }
     }
 }
