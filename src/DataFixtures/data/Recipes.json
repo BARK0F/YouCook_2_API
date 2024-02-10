@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Poulet rôti",
+    "description": "Poulet rôti, pommes de terre sautées, salade verte",
+    "nbPeople": 4
+  },
+  {
+    "name": "Hachi parmentier",
+    "description": "Une recette pleine d'amour et de patates",
+    "nbPeople": 3
+  },
+  {
+    "name": "Salade de pomme de terre",
+    "description": "Une magnifique salade de pomme de terre permettant de bien se nourrir en été",
+    "nbPeople": 5
+  },
+  {
+    "name": "Hamburger Frites",
+    "description": "Une recette qui ravira grands et petits",
+    "nbPeople": 2
+  },
+  {
+    "name": "Choux de Bruxelles",
+    "description": "Un repas bon pour la santé à faire partager à toute la famille",
+    "nbPeople": 6
+  },
+  {
+    "name": "Couscous",
+    "description": "Un repas très économique et qui ravira votre famille pour des jours",
+    "nbPeople": 10
+  }
+]
