@@ -48,15 +48,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Mark::class, orphanRemoval: true)]
     private Collection $marks;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Store::class, orphanRemoval: true)]
-    private Collection $stocks;
-
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
         $this->allergens = new ArrayCollection();
         $this->marks = new ArrayCollection();
-        $this->stocks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -243,36 +239,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($mark->getUser() === $this) {
                 $mark->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Store>
-     */
-    public function getStocks(): Collection
-    {
-        return $this->stocks;
-    }
-
-    public function addStock(Store $stock): static
-    {
-        if (!$this->stocks->contains($stock)) {
-            $this->stocks->add($stock);
-            $stock->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStock(Store $stock): static
-    {
-        if ($this->stocks->removeElement($stock)) {
-            // set the owning side to null (unless already changed)
-            if ($stock->getUser() === $this) {
-                $stock->setUser(null);
             }
         }
 
