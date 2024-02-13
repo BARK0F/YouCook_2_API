@@ -177,12 +177,12 @@ class Recipe
         return $this;
     }
 
-    public function getCategory(): ?RecipeCategory
+    public function getCategory(): ?RecipesCategory
     {
         return $this->category;
     }
 
-    public function setCategory(?RecipeCategory $category): static
+    public function setCategory(?RecipesCategory $category): static
     {
         $this->category = $category;
 
