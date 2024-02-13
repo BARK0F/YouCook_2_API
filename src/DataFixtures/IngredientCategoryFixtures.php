@@ -10,7 +10,7 @@ class IngredientCategoryFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $ingredientCategories = json_decode(file_get_contents(__DIR__.'/data/IngredientCategory.json'), true);
+        $ingredientCategories = json_decode(file_get_contents(__DIR__.'/data/IngredientCategories.json'), true);
 
         foreach ($ingredientCategories as $category) {
             IngredientCategoryFactory::createOne(['name' => $category['name']]);
