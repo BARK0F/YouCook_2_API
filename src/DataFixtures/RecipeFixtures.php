@@ -3,8 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Factory\ConstituteFactory;
-use App\Factory\MarkFactory;
-use App\Factory\RecipeCategoryFactory;
+use App\Factory\RecipesCategoryFactory;
 use App\Factory\RecipeFactory;
 use App\Factory\StepFactory;
 use App\Factory\ToolFactory;
@@ -24,7 +23,7 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
                 'name' => $recipe['name'],
                 'description' => $recipe['description'],
                 'nbPeople' => $recipe['nbPeople'],
-                'category' => RecipeCategoryFactory::random(),
+                'category' => RecipesCategoryFactory::random(),
                 'tools' => ToolFactory::randomRange(1, 3),
                 'author' => UserFactory::random(),
             ]);
@@ -32,13 +31,10 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
 
         RecipeFactory::createMany(50, function (int $i) use ($recipes) {
             return [
-                'category' => RecipeCategoryFactory::random(),
+                'category' => RecipesCategoryFactory::random(),
                 'tools' => ToolFactory::randomRange(1, 3),
                 'author' => UserFactory::random(),
                 'constitutes' => ConstituteFactory::createMany(5, [
-                    'recipe' => RecipeFactory::find(['id' => ($i + count($recipes) - 1)]),
-                ]),
-                'marks' => MarkFactory::createMany(rand(1, 10), [
                     'recipe' => RecipeFactory::find(['id' => ($i + count($recipes) - 1)]),
                 ]),
                 'steps' => StepFactory::createMany(rand(5, 10), [
@@ -52,7 +48,7 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             IngredientFixtures::class,
-            RecipeCategoryFixtures::class,
+            RecipesCategoryFixtures::class,
             ToolFixtures::class,
             UserFixtures::class,
         ];
