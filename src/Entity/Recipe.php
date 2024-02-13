@@ -41,7 +41,7 @@ class Recipe
     private Collection $tools;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
-    private ?RecipeCategory $category = null;
+    private ?RecipesCategory $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     #[ORM\JoinColumn(nullable: false)]
