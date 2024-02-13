@@ -1,0 +1,22 @@
+[
+  {
+    "name": "couteau",
+    "toolCategory": "Ustensiles"
+  },
+  {
+    "name": "cuillère",
+    "toolCategory": "Ustensiles"
+  },
+  {
+    "name": "bol",
+    "toolCategory": "Récipients"
+  },
+  {
+    "name": "four",
+    "toolCategory": "Électroménager"
+  },
+  {
+    "name": "pince",
+    "toolCategory": "Ustensiles"
+  }
+]
