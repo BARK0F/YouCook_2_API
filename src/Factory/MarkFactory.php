@@ -58,7 +58,7 @@ final class MarkFactory extends ModelFactory
     {
         return $this
             // ->afterInstantiate(function(Mark $mark): void {})
-            ;
+        ;
     }
 
     protected static function getClass(): string

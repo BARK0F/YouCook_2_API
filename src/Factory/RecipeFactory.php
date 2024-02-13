@@ -66,7 +66,7 @@ final class RecipeFactory extends ModelFactory
     {
         return $this
             // ->afterInstantiate(function(Recipe $recipe): void {})
-            ;
+        ;
     }
 
     protected static function getClass(): string
