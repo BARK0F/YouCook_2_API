@@ -3,9 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\MarkRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MarkRepository::class)]
@@ -16,20 +13,16 @@ class Mark
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]
     private ?float $mark = null;
 
-    #[ORM\OneToMany(mappedBy: 'mark', targetEntity: User::class)]
-    private Collection $users;
+    #[ORM\ManyToOne(inversedBy: 'marks')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'mark', targetEntity: Recipe::class)]
-    private Collection $recipe;
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-        $this->recipe = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'marks')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Recipe $recipe = null;
 
     public function getId(): ?int
     {
@@ -41,67 +34,33 @@ class Mark
         return $this->mark;
     }
 
-    public function setMark(?float $mark): static
+    public function setMark(float $mark): static
     {
         $this->mark = $mark;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
+    public function getUser(): ?User
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function addUser(User $user): static
+    public function setUser(?User $user): static
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->setMark($this);
-        }
+        $this->user = $user;
 
         return $this;
     }
 
-    /*
-     * @return Collection<int, Recipe>
-     */
-    public function getRecipe(): Collection
+    public function getRecipe(): ?Recipe
     {
         return $this->recipe;
     }
 
-    public function addRecipe(Recipe $recipe): static
+    public function setRecipe(?Recipe $recipe): static
     {
-        if (!$this->recipe->contains($recipe)) {
-            $this->recipe->add($recipe);
-            $recipe->setMark($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): static
-    {
-        if ($this->users->removeElement($user)) {
-            if ($user->getMark() === $this) {
-                $user->setMark(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function removeRecipe(Recipe $recipe): static
-    {
-        if ($this->recipe->removeElement($recipe)) {
-            if ($recipe->getMark() === $this) {
-                $recipe->setMark(null);
-            }
-        }
+        $this->recipe = $recipe;
 
         return $this;
     }
