@@ -23,7 +23,7 @@ class RecipeGetCest
         ];
     }
 
-    public function userCanFetchAllRecipes(ApiTester $I)
+    public function userCanGetRecipe(ApiTester $I)
     {
         $user = UserFactory::createOne()->object();
 
