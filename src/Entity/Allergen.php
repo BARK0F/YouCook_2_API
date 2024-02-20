@@ -11,20 +11,23 @@ use App\Repository\AllergenRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AllergenRepository::class)]
 #[ApiResource(order: ['name' => 'ASC'])]
 #[ApiFilter(OrderFilter::class, properties: ['name' => 'partial', 'description' => 'partial'])]
-#[Get]
+#[Get(normalizationContext: ['groups' => ['get_Allergen', 'user_Allergen']])]
 #[GetCollection]
 class Allergen
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_Allergen', 'user_Allergen'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['get_Allergen', 'user_Allergen'])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'allergen', targetEntity: Ingredient::class)]
