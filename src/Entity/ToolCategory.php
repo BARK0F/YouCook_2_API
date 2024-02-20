@@ -2,23 +2,33 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\ToolCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+#[ApiResource]
+#[Get(normalizationContext: ['groups' => ['ToolCategory_read']])]
+#[GetCollection(normalizationContext: ['groups' => ['ToolCategory_read']])]
 #[ORM\Entity(repositoryClass: ToolCategoryRepository::class)]
 class ToolCategory
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('ToolCategory_read')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('ToolCategory_read')]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'toolCategory', targetEntity: Tool::class)]
+    #[Groups('ToolCategory_read')]
     private Collection $tools;
 
     public function __construct()
