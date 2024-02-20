@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -11,7 +13,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AllergenRepository::class)]
-#[ApiResource]
+#[ApiResource(order: ['name' => 'ASC'])]
+#[ApiFilter(OrderFilter::class, properties: ['name' => 'partial', 'description' => 'partial'])]
 #[Get]
 #[GetCollection]
 class Allergen
