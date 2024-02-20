@@ -2,28 +2,44 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
 use App\Repository\ConstituteRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+#[ApiResource]
+#[Get(normalizationContext: ['groups' => 'Constitute_read'])]
+#[GetCollection(normalizationContext: ['groups' => 'Constitute_read'])]
+#[Post(security: 'user')]
+#[Patch(security: 'user and user == object.getUser()')]
 #[ORM\Entity(repositoryClass: ConstituteRepository::class)]
 class Constitute
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('Constitute_read')]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::FLOAT, precision: 6, scale: 2)]
+    #[Groups('Constitute_read')]
     private ?float $quantity = null;
 
     #[ORM\Column(length: 10)]
+    #[Groups('Constitute_read')]
     private ?string $measure = null;
 
     #[ORM\ManyToOne(inversedBy: 'constitutes')]
+    #[Groups('Constitute_read')]
     private ?Recipe $recipe = null;
 
     #[ORM\ManyToOne(inversedBy: 'constitutes')]
+    #[Groups('Constitute_read')]
     private ?Ingredient $ingredient = null;
 
     public function __construct()
