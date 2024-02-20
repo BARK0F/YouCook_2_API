@@ -37,16 +37,7 @@ class RecipeGetCest
             'nbMinute' => 45,
         ];
 
-        RecipeFactory::createOne([
-            'name' => 'Couscous',
-            'difficulty' => 'medium',
-            'description' => 'Un magnifique couscous de test',
-            'nbPeople' => 2,
-            'nbDay' => 0,
-            'nbHour' => 3,
-            'nbMinute' => 45,
-            'author' => $user,
-        ]);
+        RecipeFactory::createOne($data);
 
         $I->sendGet('/api/recipes/1');
 
