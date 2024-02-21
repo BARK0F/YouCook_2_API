@@ -28,7 +28,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
             normalizationContext: ['groups' => ['recipe:details']],
             denormalizationContext: ['groups' => ['recipe:post']]
         ),
-        new Patch(),
+        new Patch(
+            normalizationContext: ['groups' => 'recipe:details'],
+            denormalizationContext: ['groups' => 'recipe:post']
+        ),
         new Delete(),
     ]
 )]
