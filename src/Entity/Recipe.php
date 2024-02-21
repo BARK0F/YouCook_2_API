@@ -24,7 +24,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
         new Get(
             normalizationContext: ['groups' => ['recipe:details']]
         ),
-        new Post(),
+        new Post(
+            normalizationContext: ['groups' => ['recipe:post']],
+            denormalizationContext: ['groups' => ['recipe:details']]
+        ),
         new Patch(),
         new Delete(),
     ]
@@ -38,31 +41,31 @@ class Recipe
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(['recipe:read', 'recipe:details'])]
+    #[Groups(['recipe:read', 'recipe:details', 'recipe:post'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 15)]
-    #[Groups(['recipe:read', 'recipe:details'])]
+    #[Groups(['recipe:read', 'recipe:details', 'recipe:post'])]
     private ?string $difficulty = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Groups(['recipe:details'])]
+    #[Groups(['recipe:details', 'recipe:post'])]
     private ?string $description = null;
 
     #[ORM\Column]
-    #[Groups(['recipe:details'])]
+    #[Groups(['recipe:details', 'recipe:post'])]
     private ?int $nbPeople = null;
 
     #[ORM\Column]
-    #[Groups(['recipe:details'])]
+    #[Groups(['recipe:details', 'recipe:post'])]
     private ?int $nbDay = null;
 
     #[ORM\Column]
-    #[Groups(['recipe:details'])]
+    #[Groups(['recipe:details', 'recipe:post'])]
     private ?int $nbHour = null;
 
     #[ORM\Column]
-    #[Groups(['recipe:details'])]
+    #[Groups(['recipe:details', 'recipe:post'])]
     private ?int $nbMinute = null;
 
     #[ORM\ManyToMany(targetEntity: Tool::class, inversedBy: 'recipes')]
@@ -72,7 +75,7 @@ class Recipe
     private ?RecipesCategory $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $author = null;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Constitute::class, orphanRemoval: true)]
