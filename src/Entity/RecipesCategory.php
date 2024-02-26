@@ -2,23 +2,29 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Get;
 use App\Repository\RecipesCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+#[Get(normalizationContext: ['groups' => ['RecipesCategory_read']])]
 #[ORM\Entity(repositoryClass: RecipesCategoryRepository::class)]
 class RecipesCategory
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('RecipesCategory_read')]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups('RecipesCategory_read')]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Recipe::class)]
+    #[Groups('RecipesCategory_read')]
     private Collection $recipes;
 
     public function __construct()
