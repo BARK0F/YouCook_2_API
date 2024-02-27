@@ -82,3 +82,11 @@ Afin de lancer les tests de l'application, veuillez taper la commande :
 ```shell
 composer test
 ```
+
+## Style de l'application
+
+Afin de charger le style de l'application faite grâce à TailwindCSS, veuillez exécuter la commande :
+
+```shell
+npm run watch
+```
