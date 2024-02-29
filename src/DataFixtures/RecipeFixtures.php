@@ -3,8 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Factory\ConstituteFactory;
-use App\Factory\RecipesCategoryFactory;
 use App\Factory\RecipeFactory;
+use App\Factory\RecipesCategoryFactory;
 use App\Factory\StepFactory;
 use App\Factory\ToolFactory;
 use App\Factory\UserFactory;
