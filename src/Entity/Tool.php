@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Repository\ToolRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,6 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource]
 #[Get(normalizationContext: ['groups' => ['Tool_read']])]
 #[GetCollection(normalizationContext: ['groups' => ['Tool_read']])]
+#[Post(security: 'user')]
 #[ORM\Entity(repositoryClass: ToolRepository::class)]
 class Tool
 {
