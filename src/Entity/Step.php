@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[Patch(
     normalizationContext: ['groups' => ['Step_read']],
     denormalizationContext: ['groups' => ['Step_write']])]
-#[Post]
+#[Post(security: 'user')]
 #[ORM\Entity(repositoryClass: StepRepository::class)]
 class Step
 {
