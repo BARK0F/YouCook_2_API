@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Repository\StepRepository;
@@ -11,10 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[Get(normalizationContext: ['groups' => ['Step_read']])]
+#[GetCollection(normalizationContext: ['groups' => ['Step_read']])]
 #[Patch(
     normalizationContext: ['groups' => ['Step_read']],
     denormalizationContext: ['groups' => ['Step_write']])]
-#[Post(security: 'user')]
+#[Post]
 #[ORM\Entity(repositoryClass: StepRepository::class)]
 class Step
 {
