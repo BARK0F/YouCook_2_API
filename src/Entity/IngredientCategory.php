@@ -8,6 +8,7 @@ use App\Repository\IngredientCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: IngredientCategoryRepository::class)]
 #[ApiResource(order: ['name' => 'ASC'])]
@@ -17,9 +18,11 @@ class IngredientCategory
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_IngredientCategory', 'user_IngredientCategory'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['get_IngredientCategory', 'user_IngredientCategory'])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Ingredient::class)]
