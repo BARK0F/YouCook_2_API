@@ -29,7 +29,7 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
             ]);
         }
 
-        RecipeFactory::createMany(50, function (int $i) use ($recipes) {
+        RecipeFactory::createMany(2, function (int $i) use ($recipes) {
             return [
                 'category' => RecipesCategoryFactory::random(),
                 'tools' => ToolFactory::randomRange(1, 3),
