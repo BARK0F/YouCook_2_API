@@ -48,6 +48,8 @@ final class StepFactory extends ModelFactory
     {
         return [
             'name' => self::faker()->text(120),
+            'description' => self::faker()->text(120),
+            'recipe' => RecipeFactory::createOne()
         ];
 
     }
