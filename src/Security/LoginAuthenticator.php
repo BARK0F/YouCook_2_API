@@ -48,8 +48,9 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
+        $uri = $request->query->get('redirect', $this->urlGenerator->generate('api_doc'));
         // For example:
-        return new RedirectResponse($this->urlGenerator->generate('api_doc'));
+        return new RedirectResponse($uri);
     }
 
     protected function getLoginUrl(Request $request): string
