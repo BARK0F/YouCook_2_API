@@ -8,7 +8,7 @@ use App\Tests\Support\ApiTester;
 
 class StepGetCest
 {
-    protected static function expectedProperties():array
+    protected static function expectedProperties(): array
     {
         return [
             'id' => 'integer',
@@ -18,7 +18,7 @@ class StepGetCest
         ];
     }
 
-    public function anonymousGetStepWithIdTest(ApiTester $I): void
+    public function getStepWithIdTest(ApiTester $I): void
     {
         // 1. 'Arrange'
         $data = [
@@ -35,5 +35,4 @@ class StepGetCest
         $I->seeResponseIsAnEntity(Step::class, '/api/steps/1');
         $I->seeResponseIsAnItem(self::expectedProperties(), $data);
     }
-
 }
