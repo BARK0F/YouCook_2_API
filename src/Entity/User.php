@@ -23,6 +23,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
         new Patch(
             normalizationContext: ['groups' => ['user:read']],
             denormalizationContext: ['groups' => ['user:write']],
+            security: 'object === user',
         ),
     ]
 )]
