@@ -20,6 +20,4 @@ class StepRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Step::class);
     }
-
-
 }
