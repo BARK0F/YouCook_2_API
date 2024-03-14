@@ -5,13 +5,14 @@ namespace App\Tests\Api\User;
 use App\Entity\User;
 use App\Factory\UserFactory;
 use App\Tests\Support\ApiTester;
+use Codeception\Util\HttpCode;
 
 class UserGetMeCest
 {
     protected function expectedProperties(): array
     {
         return [
-            'id' => 'intege',
+            'id' => 'integer',
             'email' => 'string',
             'firstname' => 'string',
             'lastname' => 'string',
@@ -28,6 +29,15 @@ class UserGetMeCest
 
         $I->seeResponseCodeIsSuccessful();
         $I->seeResponseIsJson();
-        $I->seeResponseIsAnEntity(User::class, '/api/users/1');
+        $I->seeResponseIsAnEntity(User::class, '/api/me');
+    }
+
+    public function anonymousCantGetItsProfile(ApiTester $I): void
+    {
+        UserFactory::createOne();
+
+        $I->sendGet('/api/me');
+
+        $I->seeResponseCodeIs(HttpCode::UNAUTHORIZED);
     }
 }
