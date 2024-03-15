@@ -20,7 +20,7 @@ class IngredientGetCest
     {
         // 1. 'Arrange'
         $data = [
-            'name' => 'fjhy',
+            'name' => 'clementine',
         ];
         IngredientFactory::createOne($data);
 
@@ -32,5 +32,33 @@ class IngredientGetCest
         $I->seeResponseIsJson();
         $I->seeResponseIsAnEntity(Ingredient::class, '/api/ingredients/1');
         $I->seeResponseIsAnItem(self::expectedProperties(), $data);
+    }
+
+    public function IngredientList(ApiTester $I): void
+    {
+        IngredientFactory::createSequence([
+            ['name' => 'clementine'],
+            ['name' => 'clement'],
+        ]);
+
+        $I->sendGet('/api/ingredients');
+        $I->seeResponseCodeIsSuccessful();
+        $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(['hydra:member' => [
+            [
+                'name' => 'clement',
+                '@id' => '/api/ingredients/2',
+                '@type' => 'Ingredient',
+                'id' => 2,
+                'constitutes' => [],
+            ],
+            [
+                'name' => 'clementine',
+                '@id' => '/api/ingredients/1',
+                '@type' => 'Ingredient',
+                'id' => 1,
+                'constitutes' => [],
+            ],
+        ]]);
     }
 }
