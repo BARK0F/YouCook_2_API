@@ -58,7 +58,7 @@ final class RecipesCategoryFactory extends ModelFactory
     {
         return $this
             // ->afterInstantiate(function(RecipesCategory $recipesCategory): void {})
-            ;
+        ;
     }
 
     protected static function getClass(): string

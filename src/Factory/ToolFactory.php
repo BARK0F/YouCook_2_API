@@ -48,7 +48,7 @@ final class ToolFactory extends ModelFactory
     {
         return [
             'name' => self::faker()->text(20),
-            'toolCategory' => ToolCategoryFactory::random(),
+            'toolCategory' => ToolCategoryFactory::new(),
         ];
     }
 
