@@ -15,8 +15,8 @@ class MarkGetCollectionCest
         return [
             'id' => 'integer',
             'mark' => 'float',
-            'user',
-            'recipe',
+            'user' => 'array',
+            'recipe' => 'array',
         ];
     }
 
