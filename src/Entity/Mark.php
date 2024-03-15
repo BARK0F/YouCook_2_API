@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Repository\MarkRepository;
@@ -14,6 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     normalizationContext: ['groups' => ['Mark_read']],
     denormalizationContext: ['groups' => ['Mark_write']])]
 #[Post(security: 'user')]
+#[GetCollection(normalizationContext: ['groups' => ['Mark_read']])]
 #[ORM\Entity(repositoryClass: MarkRepository::class)]
 class Mark
 {
