@@ -4,10 +4,9 @@ namespace App\DataFixtures;
 
 use App\Factory\IngredientFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class IngredientFixtures extends Fixture implements DependentFixtureInterface
+class IngredientFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
@@ -16,12 +15,5 @@ class IngredientFixtures extends Fixture implements DependentFixtureInterface
         foreach ($ingredients as $ingredient) {
             IngredientFactory::createOne(['name' => $ingredient['name']]);
         }
-    }
-
-    public function getDependencies(): array
-    {
-        return [
-            IngredientCategoryFixtures::class,
-        ];
     }
 }
