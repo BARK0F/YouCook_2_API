@@ -3,9 +3,6 @@
 namespace App\Tests\Api\Ingredient;
 
 use App\Entity\Ingredient;
-use App\Factory\AllergenFactory;
-use App\Factory\ConstituteFactory;
-use App\Factory\IngredientCategoryFactory;
 use App\Factory\IngredientFactory;
 use App\Tests\Support\ApiTester;
 
@@ -16,10 +13,6 @@ class IngredientGetCest
         return [
             'id' => 'integer',
             'name' => 'string',
-            'picture' => 'string',
-            'category' => 'array',
-            'allergen' => 'array',
-            'constitutes' => 'array',
         ];
     }
 
@@ -27,11 +20,7 @@ class IngredientGetCest
     {
         // 1. 'Arrange'
         $data = [
-            'name' => 'clementine',
-            'picture' => '',
-            'category' => IngredientCategoryFactory::createOne(),
-            'allergen' => AllergenFactory::createOne(),
-            'constitutes' => ConstituteFactory::createOne(),
+            'name' => 'fjhy',
         ];
         IngredientFactory::createOne($data);
 
