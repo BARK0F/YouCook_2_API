@@ -2,26 +2,69 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Patch;
 use App\Repository\UserRepository;
+use App\State\MeProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource(
+    operations: [
+        new Get(
+            normalizationContext: ['groups' => ['User_read']]
+        ),
+        new Patch(
+            normalizationContext: ['groups' => ['User_read']],
+            denormalizationContext: ['groups' => ['user:write']],
+            security: 'object === user',
+        ),
+        new Get(
+            uriTemplate: '/me',
+            openapiContext: [
+                'summary' => 'Retrieves the connected user',
+                'description' => 'Retrieves the connected user',
+                'responses' => [
+                    '200' => [
+                        'description' => 'connected user resource',
+                        'content' => [
+                            'application/ld+json' => [
+                                'schema' => [
+                                    '$ref' => '#/components/schemas/User.jsonld-User_read',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            normalizationContext: ['groups' => ['User_read']],
+            provider: MeProvider::class,
+        ),
+    ]
+)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['User_read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(['User_read', 'user:write'])]
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Groups(['User_read'])]
     private array $roles = [];
 
     /**
@@ -31,12 +74,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['User_read', 'user:write'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 40)]
+    #[Groups(['User_read', 'user:write'])]
     private ?string $lastname = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['User_read', 'user:write'])]
     private ?string $biography = null;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Recipe::class, orphanRemoval: true)]
