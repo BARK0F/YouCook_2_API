@@ -2,39 +2,73 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
 use App\Repository\RecipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
+#[ApiResource(
+    operations: [
+        new GetCollection(
+            normalizationContext: ['groups' => ['recipe:read']]
+        ),
+        new Get(
+            normalizationContext: ['groups' => ['recipe:details']]
+        ),
+        new Post(
+            normalizationContext: ['groups' => ['recipe:details']],
+            denormalizationContext: ['groups' => ['recipe:post']]
+        ),
+        new Patch(
+            normalizationContext: ['groups' => 'recipe:details'],
+            denormalizationContext: ['groups' => 'recipe:post']
+        ),
+        new Delete(),
+    ]
+)]
 class Recipe
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['recipe:read', 'recipe:details'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['recipe:read', 'recipe:details', 'recipe:post'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 15)]
+    #[Groups(['recipe:read', 'recipe:details', 'recipe:post'])]
     private ?string $difficulty = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['recipe:details', 'recipe:post'])]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(['recipe:details', 'recipe:post'])]
     private ?int $nbPeople = null;
 
     #[ORM\Column]
+    #[Groups(['recipe:details', 'recipe:post'])]
     private ?int $nbDay = null;
 
     #[ORM\Column]
+    #[Groups(['recipe:details', 'recipe:post'])]
     private ?int $nbHour = null;
 
     #[ORM\Column]
+    #[Groups(['recipe:details', 'recipe:post'])]
     private ?int $nbMinute = null;
 
     #[ORM\ManyToMany(targetEntity: Tool::class, inversedBy: 'recipes')]
@@ -44,7 +78,7 @@ class Recipe
     private ?RecipesCategory $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $author = null;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Constitute::class, orphanRemoval: true)]
