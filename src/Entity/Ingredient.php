@@ -20,7 +20,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiFilter(OrderFilter::class, properties: ['name' => 'partial', 'description' => 'partial'])]
 #[Get(normalizationContext: ['groups' => ['get_Ingredient', 'user_Ingredient']])]
 #[GetCollection]
-#[Patch]
 #[Post(security: 'user')]
 class Ingredient
 {
