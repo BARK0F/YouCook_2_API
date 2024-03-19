@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[Get(normalizationContext: ['groups' => ['get_Ingredient', 'user_Ingredient']])]
 #[GetCollection]
 #[Patch]
-#[Post]
+#[Post(security: 'user')]
 class Ingredient
 {
     #[ORM\Id]
