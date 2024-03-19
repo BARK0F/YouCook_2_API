@@ -61,4 +61,17 @@ class IngredientGetCest
             ],
         ]]);
     }
+
+    public function anonymousGetIngredientWithIdTest(ApiTester $I)
+    {
+        $data = [
+            'name' => 'clementine',
+        ];
+        IngredientFactory::createOne($data);
+        $I->sendGet('/api/ingredients/1');
+        $I->seeResponseCodeIsSuccessful();
+        $I->seeResponseIsJson();
+        $I->seeResponseIsAnEntity(Ingredient::class, '/api/ingredients/1');
+        $I->seeResponseIsAnItem(self::expectedProperties(), $data);
+    }
 }
