@@ -15,10 +15,10 @@ class ToolFixtures extends Fixture implements DependentFixtureInterface
         $tools = json_decode(file_get_contents(__DIR__.'/data/Tool.json'), true);
         foreach ($tools as $tool) {
             ToolFactory::createOne([
-                    'name' => $tool['name'],
-                    'toolCategory' => ToolCategoryFactory::findOrCreate([
-                        'name' => $tool['toolCategory'],
-                    ])]
+                'name' => $tool['name'],
+                'toolCategory' => ToolCategoryFactory::findOrCreate([
+                    'name' => $tool['toolCategory'],
+                ])]
             );
         }
     }

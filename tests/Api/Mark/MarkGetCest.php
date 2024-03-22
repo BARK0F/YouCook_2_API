@@ -38,5 +38,4 @@ class MarkGetCest
         $I->seeResponseContainsJson(['id' => $mark->getId()]);
         $I->seeResponseContainsJson(['mark' => $data['mark']]);
     }
-
 }
