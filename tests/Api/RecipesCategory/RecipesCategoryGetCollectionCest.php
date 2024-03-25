@@ -4,8 +4,6 @@ namespace App\Tests\Api\RecipesCategory;
 
 use App\Entity\RecipesCategory;
 use App\Factory\RecipesCategoryFactory;
-use App\Factory\RecipeFactory;
-use App\Factory\UserFactory;
 use App\Tests\Support\ApiTester;
 
 class RecipesCategoryGetCollectionCest
@@ -35,5 +33,4 @@ class RecipesCategoryGetCollectionCest
         ]);
         $I->seeResponseMatchesJsonType(self::expectedProperties(), '$["hydra:member"][0]');
     }
-
 }
