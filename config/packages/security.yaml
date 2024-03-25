@@ -39,6 +39,12 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+      - { path: ^/api/ingredients$, roles: PUBLIC_ACCESS }
+      - { path: ^/api/ingredients/*, roles: PUBLIC_ACCESS }
+      - { path: ^/api/tools$, roles: PUBLIC_ACCESS }
+      - { path: ^/api/tools/*, roles: PUBLIC_ACCESS }
+      - { path: ^/api/tool_categories$, roles: PUBLIC_ACCESS }
+      - { path: ^/api/tool_categories/*, roles: PUBLIC_ACCESS }
       - { path: ^/api/users/\d+$, roles: PUBLIC_ACCESS }
       - { path: ^/api/login$, roles: PUBLIC_ACCESS }
       - { path: ^/api/logout$, roles: PUBLIC_ACCESS }
