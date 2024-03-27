@@ -43,6 +43,9 @@ security:
       - { path: ^/api/ingredients/\d+$, roles: PUBLIC_ACCESS, method: ["GET"]  }
       - { path: ^/api/recipes$, roles: PUBLIC_ACCESS, method: ["GET"]  }
       - { path: ^/api/recipes/\d+$, roles: PUBLIC_ACCESS, method: ["GET"]  }
+      - { path: ^/api/recipes_categories$, roles: PUBLIC_ACCESS, method: [ "GET" ] }
+      - { path: ^/api/recipes_categories/\d+$, roles: PUBLIC_ACCESS, method: [ "GET" ] }
+      - { path: ^/api/recipes/\d+$, roles: IS_AUTHENTICATED_FULLY, method: [ "POST"] }
       - { path: ^/api/marks$, roles: PUBLIC_ACCESS, method: ["GET"]  }
       - { path: ^/api/marks/\d+$, roles: PUBLIC_ACCESS, method: ["GET"]  }
       - { path: ^/api/steps$, roles: PUBLIC_ACCESS, method: ["GET"]  }

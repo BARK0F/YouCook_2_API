@@ -57,7 +57,6 @@ final class RecipeFactory extends ModelFactory
             'nbMinute' => self::faker()->numberBetween(0, 59),
             'nbPeople' => self::faker()->numberBetween(2, 10),
             'author' => UserFactory::new(),
-            'author' => UserFactory::createOne(),
         ];
     }
 
