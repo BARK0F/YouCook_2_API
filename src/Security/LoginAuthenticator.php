@@ -34,7 +34,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
      *
      * @throws HttpException
      */
-    public function start(Request $request, AuthenticationException $authException = null): Response
+    public function start(Request $request, ?AuthenticationException $authException = null): Response
     {
         /** @var string $route current route */
         $route = $request->get('_route');

@@ -1,30 +1,29 @@
 <?php
 
-namespace App\Tests\Api\RecipesCategory;
+namespace App\Tests\Api\Allergen;
 
-use App\Entity\RecipesCategory;
-use App\Factory\RecipesCategoryFactory;
+use App\Entity\Allergen;
+use App\Factory\AllergenFactory;
 use App\Tests\Support\ApiTester;
 
-class RecipesCategoryGetCollectionCest
+class AllergenGetCollectionCest
 {
     protected static function expectedProperties(): array
     {
         return [
             'id' => 'integer',
             'name' => 'string',
-            'recipes' => 'array',
         ];
     }
 
-    public function getRecipesCategoryCollectionTest(ApiTester $I): void
+    public function getAllergenCollectionTest(ApiTester $I): void
     {
-        $recipesCategories = RecipesCategoryFactory::createMany(5);
-        $I->sendGet('/api/recipes_categories');
+        $allergen = AllergenFactory::createMany(5);
+        $I->sendGet('/api/allergen');
 
         $I->seeResponseCodeIsSuccessful();
         $I->seeResponseIsJson();
-        $I->seeResponseIsACollection(RecipesCategory::class, '/api/recipes_categories', [
+        $I->seeResponseIsACollection(Allergen::class, '/api/allergen', [
             'hydra:member' => 'array',
             'hydra:totalItems' => 'integer',
         ]);
