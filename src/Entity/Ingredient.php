@@ -7,7 +7,6 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use App\Repository\IngredientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,8 +19,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiFilter(OrderFilter::class, properties: ['name' => 'partial', 'description' => 'partial'])]
 #[Get(normalizationContext: ['groups' => ['get_Ingredient', 'user_Ingredient']])]
 #[GetCollection]
-#[Patch]
-#[Post]
+#[Post(security: 'user')]
 class Ingredient
 {
     #[ORM\Id]

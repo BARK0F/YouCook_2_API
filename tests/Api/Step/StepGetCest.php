@@ -14,7 +14,7 @@ class StepGetCest
             'id' => 'integer',
             'name' => 'string',
             'description' => 'string',
-            'recipe' => 'array',
+            'recipe' => 'string',
         ];
     }
 

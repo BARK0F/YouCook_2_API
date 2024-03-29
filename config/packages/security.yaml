@@ -39,7 +39,22 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-      - { path: ^/api/users/\d+$, roles: PUBLIC_ACCESS }
+      - { path: ^/api/ingredients$, roles: PUBLIC_ACCESS, method: ["GET"] }
+      - { path: ^/api/ingredients/\d+$, roles: PUBLIC_ACCESS, method: ["GET"]  }
+      - { path: ^/api/recipes$, roles: PUBLIC_ACCESS, method: ["GET"]  }
+      - { path: ^/api/recipes/\d+$, roles: PUBLIC_ACCESS, method: ["GET"]  }
+      - { path: ^/api/recipes_categories$, roles: PUBLIC_ACCESS, method: [ "GET" ] }
+      - { path: ^/api/recipes_categories/\d+$, roles: PUBLIC_ACCESS, method: [ "GET" ] }
+      - { path: ^/api/recipes/\d+$, roles: IS_AUTHENTICATED_FULLY, method: [ "POST"] }
+      - { path: ^/api/marks$, roles: PUBLIC_ACCESS, method: ["GET"]  }
+      - { path: ^/api/marks/\d+$, roles: PUBLIC_ACCESS, method: ["GET"]  }
+      - { path: ^/api/steps$, roles: PUBLIC_ACCESS, method: ["GET"]  }
+      - { path: ^/api/steps/\d+$, roles: PUBLIC_ACCESS, method: ["GET"]  }
+      - { path: ^/api/tools$, roles: PUBLIC_ACCESS, method: ["GET"]  }
+      - { path: ^/api/tools/\d+$, roles: PUBLIC_ACCESS, method: ["GET"]  }
+      - { path: ^/api/tool_categories$, roles: PUBLIC_ACCESS, method: ["GET"]  }
+      - { path: ^/api/tool_categories/\d+$, roles: PUBLIC_ACCESS, method: ["GET"]  }
+      - { path: ^/api/users/\d+$, roles: PUBLIC_ACCESS, method: ["GET"]  }
       - { path: ^/api/login$, roles: PUBLIC_ACCESS }
       - { path: ^/api/logout$, roles: PUBLIC_ACCESS }
       - { path: ^/api/register$, roles: PUBLIC_ACCESS }

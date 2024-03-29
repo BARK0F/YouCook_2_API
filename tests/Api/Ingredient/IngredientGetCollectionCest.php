@@ -1,32 +1,30 @@
 <?php
 
-namespace App\Tests\Api\Step;
+namespace App\Tests\Api\Ingredient;
 
-use App\Entity\Step;
-use App\Factory\StepFactory;
+use App\Entity\Ingredient;
+use App\Factory\IngredientFactory;
 use App\Tests\Support\ApiTester;
 
-class StepGetCollectionCest
+class IngredientGetCollectionCest
 {
     protected static function expectedProperties(): array
     {
         return [
             'id' => 'integer',
             'name' => 'string',
-            'description' => 'string',
-            'recipe' => 'string',
         ];
     }
 
-    public function getStepCollectionTest(ApiTester $I): void
+    public function getCollectionTest(ApiTester $I): void
     {
-        StepFactory::createMany(5);
+        IngredientFactory::createMany(5);
 
-        $I->sendGet('/api/steps');
+        $I->sendGet('/api/ingredients');
 
         $I->seeResponseCodeIsSuccessful();
         $I->seeResponseIsJson();
-        $I->seeResponseIsACollection(Step::class, '/api/steps', [
+        $I->seeResponseIsACollection(Ingredient::class, '/api/ingredients', [
             'hydra:member' => 'array',
             'hydra:totalItems' => 'integer',
         ]);
