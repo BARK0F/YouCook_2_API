@@ -44,7 +44,7 @@ class RecipeFixtures extends Fixture implements DependentFixtureInterface
         });
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             IngredientFixtures::class,
