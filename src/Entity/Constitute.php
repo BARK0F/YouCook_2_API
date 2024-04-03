@@ -27,11 +27,11 @@ class Constitute
     private ?int $id = null;
 
     #[ORM\Column(type: Types::FLOAT, precision: 6, scale: 2)]
-    #[Groups('Constitute_read')]
+    #[Groups(['Constitute_read', 'recipe:read', 'recipe:details'])]
     private ?float $quantity = null;
 
     #[ORM\Column(length: 10)]
-    #[Groups('Constitute_read')]
+    #[Groups(['Constitute_read', 'recipe:read', 'recipe:details'])]
     private ?string $measure = null;
 
     #[ORM\ManyToOne(inversedBy: 'constitutes')]
@@ -39,7 +39,7 @@ class Constitute
     private ?Recipe $recipe = null;
 
     #[ORM\ManyToOne(inversedBy: 'constitutes')]
-    #[Groups('Constitute_read')]
+    #[Groups(['Constitute_read', 'recipe:read', 'recipe:details'])]
     private ?Ingredient $ingredient = null;
 
     public function __construct()
