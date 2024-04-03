@@ -26,12 +26,12 @@ class Mark
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Groups(['Mark_read', 'Mark_write'])]
+    #[Groups(['Mark_read', 'Mark_write', 'recipe:read', 'recipe:details'])]
     private ?float $mark = null;
 
     #[ORM\ManyToOne(inversedBy: 'marks')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['Mark_read', 'Mark_write'])]
+    #[Groups(['Mark_read', 'Mark_write', 'recipe:read', 'recipe:details'])]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'marks')]
