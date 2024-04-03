@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\IngredientCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,6 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: IngredientCategoryRepository::class)]
 #[ApiResource(order: ['name' => 'ASC'])]
 #[Get(normalizationContext: ['groups' => ['get_IngredientCategory', 'user_IngredientCategory']])]
+#[GetCollection(normalizationContext: ['groups' => ['get_IngredientCategory', 'user_IngredientCategory']])]
 class IngredientCategory
 {
     #[ORM\Id]
