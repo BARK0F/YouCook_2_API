@@ -76,7 +76,7 @@ class Recipe
     private Collection $tools;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
-    #[Groups(['recipe:read', 'recipe:details'])]
+    #[Groups(['recipe:read', 'recipe:details', 'recipe:post'])]
     private ?RecipesCategory $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
