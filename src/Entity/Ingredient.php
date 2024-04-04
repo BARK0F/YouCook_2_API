@@ -36,9 +36,11 @@ class Ingredient
     private ?string $picture = null;
 
     #[ORM\ManyToOne(inversedBy: 'ingredients')]
+    #[Groups(['get_Ingredient', 'user_Ingredient', 'Constitute_read', 'recipe:read', 'recipe:details'])]
     private ?IngredientCategory $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'ingredients')]
+    #[Groups(['get_Ingredient', 'user_Ingredient', 'Constitute_read', 'recipe:read', 'recipe:details'])]
     private ?Allergen $allergen = null;
 
     #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: Constitute::class)]

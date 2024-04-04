@@ -72,22 +72,28 @@ class Recipe
     private ?int $nbMinute = null;
 
     #[ORM\ManyToMany(targetEntity: Tool::class, inversedBy: 'recipes')]
+    #[Groups(['recipe:read', 'recipe:details'])]
     private Collection $tools;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
+    #[Groups(['recipe:read', 'recipe:details'])]
     private ?RecipesCategory $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Groups(['recipe:read', 'recipe:details'])]
     private ?User $author = null;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Constitute::class, orphanRemoval: true)]
+    #[Groups(['recipe:read', 'recipe:details'])]
     private Collection $constitutes;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Mark::class, orphanRemoval: true)]
+    #[Groups(['recipe:read', 'recipe:details'])]
     private Collection $marks;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, orphanRemoval: true)]
+    #[Groups(['recipe:read', 'recipe:details'])]
     private Collection $steps;
 
     public function __construct()

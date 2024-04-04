@@ -26,7 +26,7 @@ class Tool
     private ?int $id = null;
 
     #[ORM\Column(length: 20)]
-    #[Groups('Tool_read')]
+    #[Groups(['Tool_read', 'recipe:read', 'recipe:details'])]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Recipe::class, mappedBy: 'tools')]
@@ -34,7 +34,7 @@ class Tool
 
     #[ORM\ManyToOne(inversedBy: 'tools')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups('Tool_read')]
+    #[Groups(['Tool_read', 'recipe:read', 'recipe:details', 'recipe:read', 'recipe:details'])]
     private ?ToolCategory $toolCategory = null;
 
     public function __construct()
