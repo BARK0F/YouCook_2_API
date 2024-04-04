@@ -81,7 +81,7 @@ class Recipe
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     #[ORM\JoinColumn(nullable: true)]
-    #[Groups(['recipe:read', 'recipe:details'])]
+    #[Groups(['recipe:read', 'recipe:details', 'recipe:post'])]
     private ?User $author = null;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Constitute::class, orphanRemoval: true)]
