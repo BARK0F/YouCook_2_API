@@ -27,11 +27,11 @@ class Step
     private ?int $id = null;
 
     #[ORM\Column(length: 120)]
-    #[Groups(['Step_read', 'Step_write'])]
+    #[Groups(['Step_read', 'Step_write', 'recipe:details'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Groups(['Step_read', 'Step_write'])]
+    #[Groups(['Step_read', 'Step_write', 'recipe:details'])]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'steps')]
